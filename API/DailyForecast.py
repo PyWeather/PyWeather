@@ -13,13 +13,13 @@ class DailyForecast(object):
         data: Dict = requests.get(forecast_url).json()
         self.list_of_weather_data: List[Dict] = data["list"]
         self.parsed_day_data: List[WeatherData] = [WeatherData(city,
-                                                   datetime.utcfromtimestamp(x["dt"] + 7200)
-                                                   .strftime('%d-%m-%Yr. %H:%M:%S'),
-                                                   x["main"]["temp"],
-                                                   x["main"]["feels_like"],
-                                                   x["main"]["humidity"],
-                                                   x["wind"]["speed"],
-                                                   x["weather"][0]["description"])
+                                                               datetime.utcfromtimestamp(x["dt"] + 7200)
+                                                               .strftime('%d-%m-%Yr. %H:%M:%S'),
+                                                               x["main"]["temp"],
+                                                               x["main"]["feels_like"],
+                                                               x["main"]["humidity"],
+                                                               x["wind"]["speed"],
+                                                               x["weather"][0]["description"])
                                                    for x in self.list_of_weather_data
                                                    if datetime.utcfromtimestamp(x["dt"] + 7200).strftime('%H') == "14"]
         self.parsed_night_data: List[WeatherData] = [WeatherData(city,

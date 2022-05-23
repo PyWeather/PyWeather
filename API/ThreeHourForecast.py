@@ -6,13 +6,13 @@ from typing import List, Dict
 class WeatherData(object):
     def __init__(self, city: str, date: str, temperature: float, feels_like: float,
                  humidity: int, wind_speed: float, description: str):
-        self.city = city
-        self.date = date
-        self.temperature = temperature
-        self.feels_like = feels_like
-        self.humidity = humidity
-        self.wind_speed = wind_speed
-        self.description = description
+        self.city: str = city
+        self.date: str = date
+        self.temperature: float = temperature
+        self.feels_like: float = feels_like
+        self.humidity: int = humidity
+        self.wind_speed: float = wind_speed
+        self.description: str = description
 
 
 class ThreeHourForecast(object):

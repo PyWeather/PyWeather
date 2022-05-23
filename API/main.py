@@ -13,6 +13,8 @@ print(f"{data.city}:\n"
       f"Prędkość wiatru: {data.wind_speed}\n"
       f"Pogoda: {data.description.capitalize()}")
 
+print("\n=================\n")
+
 data2 = ThreeHourForecast("PL", "Zielona Góra", api_key)
 
 print(f"{data2.parsed_data[0].city}:\n"

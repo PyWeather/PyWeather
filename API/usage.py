@@ -11,7 +11,9 @@ print(f"{data.city}:\n"
       f"Odczuwalna temperatura: {data.feels_like}\n"
       f"Wilgotność powietrza: {data.humidity}\n"
       f"Prędkość wiatru: {data.wind_speed}\n"
-      f"Pogoda: {data.description.capitalize()}")
+      f"Pogoda: {data.description.capitalize()}\n"
+      f"Wschód słońca: {data.sunrise}\n"
+      f"Zachód słońca: {data.sunset}")
 
 print("\n=================\n")
 

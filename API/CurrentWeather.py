@@ -18,3 +18,5 @@ class CurrentWeather(object):
         self.humidity: int = data["main"]["humidity"]
         self.description: str = data["weather"][0]["description"]
         self.city: str = city
+        self.sunrise: str = datetime.utcfromtimestamp(data["sys"]["sunrise"] + 7200).strftime('%H:%M')
+        self.sunset: str = datetime.utcfromtimestamp(data["sys"]["sunset"] + 7200).strftime('%H:%M')

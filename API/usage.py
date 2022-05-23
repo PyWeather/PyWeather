@@ -2,7 +2,7 @@ from CurrentWeather import CurrentWeather
 from ThreeHourForecast import ThreeHourForecast
 from DailyForecast import DailyForecast
 
-api_key = "e3b4d61af9466bfa61b7d81adff527ba"
+api_key = "e3b4d61af9466bfa61b7d81adff527ba"  # this key is just an example, not a working API key
 
 current_weather = CurrentWeather("PL", "Zielona Góra", api_key)
 

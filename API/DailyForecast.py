@@ -19,7 +19,8 @@ class DailyForecast(object):
                                                                x["main"]["feels_like"],
                                                                x["main"]["humidity"],
                                                                x["wind"]["speed"],
-                                                               x["weather"][0]["description"])
+                                                               x["weather"][0]["description"],
+                                                               x["weather"][0]["icon"])
                                                    for x in self.list_of_weather_data
                                                    if datetime.utcfromtimestamp(x["dt"] + 7200).strftime('%H') == "14"]
         self.parsed_night_data: List[WeatherData] = [WeatherData(city,
@@ -29,6 +30,7 @@ class DailyForecast(object):
                                                                  x["main"]["feels_like"],
                                                                  x["main"]["humidity"],
                                                                  x["wind"]["speed"],
-                                                                 x["weather"][0]["description"])
+                                                                 x["weather"][0]["description"],
+                                                                 x["weather"][0]["icon"])
                                                      for x in self.list_of_weather_data
                                                      if datetime.utcfromtimestamp(x["dt"] + 7200).strftime('%H') == "02"]

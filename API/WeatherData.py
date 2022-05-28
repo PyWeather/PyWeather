@@ -1,6 +1,6 @@
 class WeatherData(object):
     def __init__(self, city: str, date: str, temperature: float, feels_like: float,
-                 humidity: int, wind_speed: float, description: str):
+                 humidity: int, wind_speed: float, description: str, icon_id: str):
         self.city: str = city
         self.date: str = date
         self.temperature: float = temperature
@@ -8,3 +8,4 @@ class WeatherData(object):
         self.humidity: int = humidity
         self.wind_speed: float = wind_speed
         self.description: str = description
+        self.icon_id: str = icon_id

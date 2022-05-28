@@ -18,4 +18,5 @@ class ThreeHourForecast(object):
                                                x["main"]["feels_like"],
                                                x["main"]["humidity"],
                                                x["wind"]["speed"],
-                                               x["weather"][0]["description"]) for x in self.list_of_weather_data]
+                                               x["weather"][0]["description"],
+                                               x["weather"][0]["icon"]) for x in self.list_of_weather_data]

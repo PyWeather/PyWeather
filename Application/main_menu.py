@@ -14,22 +14,22 @@ class Menu(object):
         self.api_key = self.get_api()
         self.window: tk.Tk = tk.Tk()
         self.window.title("PyWeather")
-        self.icon = tk.PhotoImage(file="res/images/icon.png")
+        self.icon: tk.PhotoImage = tk.PhotoImage(file="res/images/icon.png")
         self.window.iconphoto(False, self.icon)
         self.canvas: tk.Canvas = tk.Canvas(self.window)
-        self.background = tk.PhotoImage(file="res/images/background/background1.png")
+        self.background: tk.PhotoImage = tk.PhotoImage(file="res/images/background/background1.png")
         with open("res/data/country_codes.json") as file:
             self.country_codes = json.load(file)
-        self.countries = Combobox(self.window, values=list(self.country_codes.values()), state="readonly")
+        self.countries: Combobox = Combobox(self.window, values=list(self.country_codes.values()), state="readonly")
         with open("res/data/units.json") as file:
             self.units = json.load(file)
-        self.units_widget = Combobox(self.window, values=list(self.units.keys()), state="readonly")
-        self.city = tk.Entry(self.window, width=100)
-        self.search_button = tk.Button(self.window, command=self.search, text="\U0001F50D Szukaj")
+        self.units_widget: Combobox = Combobox(self.window, values=list(self.units.keys()), state="readonly")
+        self.city: tk.Entry = tk.Entry(self.window, width=100)
+        self.search_button: tk.Button = tk.Button(self.window, command=self.search, text="\U0001F50D Szukaj")
         self.create_menu()
 
     @staticmethod
-    def get_api():
+    def get_api() -> str:
         if not os.path.isfile("api_key.txt"):
             open("api_key.txt", 'x').close()
             exit()
@@ -38,20 +38,20 @@ class Menu(object):
                 return file.read()
 
     def search(self):
-        units = self.units[self.units_widget.get()]
+        units: str = self.units[self.units_widget.get()]
         try:
-            current = CurrentWeather(self.countries.get(),
-                                     self.city.get(),
-                                     self.api_key,
-                                     units)
-            hourly = ThreeHourForecast(self.countries.get(),
-                                       self.city.get(),
-                                       self.api_key,
-                                       units)
-            daily = DailyForecast(self.countries.get(),
-                                  self.city.get(),
-                                  self.api_key,
-                                  units)
+            current: CurrentWeather = CurrentWeather(self.countries.get(),
+                                                     self.city.get(),
+                                                     self.api_key,
+                                                     units)
+            hourly: ThreeHourForecast = ThreeHourForecast(self.countries.get(),
+                                                          self.city.get(),
+                                                          self.api_key,
+                                                          units)
+            daily: DailyForecast = DailyForecast(self.countries.get(),
+                                                 self.city.get(),
+                                                 self.api_key,
+                                                 units)
 
             # self.window.destroy()
             # ForecastWindow(current, hourly, daily, units)
@@ -76,5 +76,5 @@ class Menu(object):
 
 
 if __name__ == "__main__":
-    menu = Menu()
+    menu: Menu = Menu()
     menu.window.mainloop()

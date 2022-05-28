@@ -1,7 +1,7 @@
 import requests
 from datetime import datetime
 from typing import List, Dict
-from WeatherData import WeatherData
+from API.WeatherData import WeatherData
 
 
 class DailyForecast(object):

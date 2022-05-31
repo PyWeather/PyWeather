@@ -6,7 +6,7 @@ import os
 from API.CurrentWeather import CurrentWeather
 from API.DailyForecast import DailyForecast
 from API.ThreeHourForecast import ThreeHourForecast
-# from forecast_window import ForecastWindow
+from forecast_window import ForecastWindow
 
 
 class Menu(object):
@@ -53,8 +53,8 @@ class Menu(object):
                                                  self.api_key,
                                                  units)
 
-            # self.window.destroy()
-            # ForecastWindow(current, hourly, daily, units)
+            self.window.destroy()
+            ForecastWindow(current, hourly, daily, units)
 
         except IndexError:
             messagebox.showerror("Nieznana miejscowość", "Nie znaleźliśmy takiej miejsowości.")

@@ -17,7 +17,7 @@ class ForecastWindow(object):
         self.icon: tk.PhotoImage = tk.PhotoImage(file="res/images/icon.png")
         self.window.iconphoto(False, self.icon)
         self.canvas: tk.Canvas = tk.Canvas(self.window)
-        self.background: tk.PhotoImage = tk.PhotoImage(file="res/images/background/background3.png")
+        self.background: tk.PhotoImage = tk.PhotoImage(file="res/images/background/background2.png")
 
         with open("res/data/images.json") as file:
             self.weather_icons = json.load(file)

@@ -15,9 +15,7 @@ class ForecastWindow(object):
         self.units: str = units
 
         self.window: tk.Tk = tk.Tk()
-        self.window.title("PyWeather")
         self.icon: tk.PhotoImage = tk.PhotoImage(file="res/images/icon.png")
-        self.window.iconphoto(False, self.icon)
         self.canvas: tk.Canvas = tk.Canvas(self.window)
         self.background: tk.PhotoImage = tk.PhotoImage(file="res/images/background/background2.png")
 
@@ -43,6 +41,8 @@ class ForecastWindow(object):
     def create_window(self):
         self.window.geometry("+500+200")
         self.window.resizable(width=False, height=False)
+        self.window.title("PyWeather")
+        self.window.iconphoto(False, self.icon)
         self.canvas.config(width=800, height=600, highlightthickness=0)
         self.canvas.pack()
         self.canvas.create_image(400, 300, image=self.background)

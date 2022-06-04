@@ -1,5 +1,7 @@
 import json
 import tkinter as tk
+from typing import Dict
+
 from API.DailyForecast import DailyForecast
 from API.ThreeHourForecast import ThreeHourForecast
 from API.CurrentWeather import CurrentWeather
@@ -20,19 +22,20 @@ class ForecastWindow(object):
         self.background: tk.PhotoImage = tk.PhotoImage(file="res/images/background/background2.png")
 
         with open("res/data/images.json") as file:
-            self.weather_icons = json.load(file)
+            self.weather_icons: Dict[str, str] = json.load(file)
 
         with open("res/data/wind_speed.json") as file:
-            self.wind_speed_unit = json.load(file)[self.units]
+            self.wind_speed_unit: str = json.load(file)[self.units]
 
-        self.current_weather_image = tk.PhotoImage(file=f"res/images/weather_icons/"
-                                                        f"{self.weather_icons[self.current.icon_id[:2]]}").subsample(9, 9)
-        self.unit_image = tk.PhotoImage(file=f"res/images/symbols/{self.units}.png").subsample(17, 17)
-        self.unit_icon = tk.PhotoImage(file=f"res/images/symbols/{self.units}.png").subsample(35, 35)
-        self.wind_icon = tk.PhotoImage(file="res/images/symbols/wind.png").subsample(30, 30)
-        self.humidity_icon = tk.PhotoImage(file="res/images/symbols/humidity.png").subsample(8, 8)
-        self.sunrise_icon = tk.PhotoImage(file="res/images/symbols/sunrise.png").subsample(25, 25)
-        self.sunset_icon = tk.PhotoImage(file="res/images/symbols/sunset.png").subsample(25, 25)
+        self.current_weather_image: tk.PhotoImage = tk.PhotoImage(file=f"res/images/weather_icons/"
+                                                                       f"{self.weather_icons[self.current.icon_id[:2]]}"
+                                                                  ).subsample(9, 9)
+        self.unit_image: tk.PhotoImage = tk.PhotoImage(file=f"res/images/symbols/{self.units}.png").subsample(17, 17)
+        self.unit_icon: tk.PhotoImage = tk.PhotoImage(file=f"res/images/symbols/{self.units}.png").subsample(35, 35)
+        self.wind_icon: tk.PhotoImage = tk.PhotoImage(file="res/images/symbols/wind.png").subsample(30, 30)
+        self.humidity_icon: tk.PhotoImage = tk.PhotoImage(file="res/images/symbols/humidity.png").subsample(8, 8)
+        self.sunrise_icon: tk.PhotoImage = tk.PhotoImage(file="res/images/symbols/sunrise.png").subsample(25, 25)
+        self.sunset_icon: tk.PhotoImage = tk.PhotoImage(file="res/images/symbols/sunset.png").subsample(25, 25)
 
         self.create_window()
         self.window.mainloop()

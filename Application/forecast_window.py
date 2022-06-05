@@ -53,13 +53,15 @@ class ForecastWindow(object):
     def create_window(self):
         self.window.geometry("+500+200")
         self.window.resizable(width=False, height=False)
-        self.window.title("PyWeather")
+        self.window.title(f"PyWeather - {self.current.city}, {self.current.date_time}")
         self.window.iconphoto(False, self.icon)
         self.canvas.config(width=800, height=600, highlightthickness=0)
         self.canvas.pack()
         self.canvas.create_image(400, 300, image=self.background)
         self.show_current_weather()
+        self.canvas.create_line(0, 255, 800, 255, width=2)
         self.show_hourly_forecast()
+        self.canvas.create_line(0, 405, 800, 405, width=2)
         self.show_daily_forecast()
 
     def show_current_weather(self):
@@ -80,7 +82,7 @@ class ForecastWindow(object):
 
     def show_hourly_forecast(self):
         x = 85
-        hour_y = 280
+        hour_y = 270
         icon_y = 330
         temp_y = 385
 
@@ -93,16 +95,15 @@ class ForecastWindow(object):
 
     def show_daily_forecast(self):
         x = 100
-        date_y = 430
-        weather_symbol_y = 490
-        icon_temp_y = 560
+        date_y = 420
+        weather_symbol_y = 485
+        icon_temp_y = 565
 
         for icon, day_data, night_data in zip(self.daily_icons, self.daily.parsed_day_data, self.daily.parsed_night_data):
             self.canvas.create_text(x, date_y, text=day_data.date[:12], font=("TkDefaultFont", 14))
             self.canvas.create_image(x, weather_symbol_y, image=icon)
             self.canvas.create_image(x-40, icon_temp_y, image=self.day_night_icon)
-            self.canvas.create_text(x+20, icon_temp_y, text=f"{round(day_data.temperature, 1)}{self.temp_units}\n"
-                                                            f"{round(night_data.temperature, 1)}{self.temp_units}",
+            self.canvas.create_text(x+20, icon_temp_y, text=f"{round(day_data.temperature, 1)} {self.temp_units}\n"
+                                                            f"{round(night_data.temperature, 1)} {self.temp_units}",
                                     font=("TkDefaultFont", 14))
             x += 150
-

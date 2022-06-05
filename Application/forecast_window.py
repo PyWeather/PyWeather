@@ -25,6 +25,9 @@ class ForecastWindow(object):
         with open("res/data/wind_speed.json") as file:
             self.wind_speed_unit: str = json.load(file)[self.units]
 
+        with open("res/data/temp_units.json", encoding="UTF-8") as file:
+            self.temp_units: str = json.load(file)[self.units]
+
         self.current_weather_image: tk.PhotoImage = tk.PhotoImage(file=f"res/images/weather_icons/"
                                                                        f"{self.weather_icons[self.current.icon_id[:2]]}"
                                                                   ).subsample(9, 9)
@@ -34,6 +37,15 @@ class ForecastWindow(object):
         self.humidity_icon: tk.PhotoImage = tk.PhotoImage(file="res/images/symbols/humidity.png").subsample(8, 8)
         self.sunrise_icon: tk.PhotoImage = tk.PhotoImage(file="res/images/symbols/sunrise.png").subsample(25, 25)
         self.sunset_icon: tk.PhotoImage = tk.PhotoImage(file="res/images/symbols/sunset.png").subsample(25, 25)
+        self.day_night_icon: tk.PhotoImage = tk.PhotoImage(file="res/images/symbols/day_night.png").subsample(25, 25)
+
+        self.hourly_icons = [tk.PhotoImage(file=f"res/images/weather_icons/"
+                                                f"{self.weather_icons[i.icon_id[:2]]}").subsample(17, 17)
+                             for i in self.hourly.parsed_data]
+
+        self.daily_icons = [tk.PhotoImage(file=f"res/images/weather_icons/"
+                                               f"{self.weather_icons[i.icon_id[:2]]}").subsample(14, 14)
+                            for i in self.daily.parsed_day_data]
 
         self.create_window()
         self.window.mainloop()
@@ -47,6 +59,8 @@ class ForecastWindow(object):
         self.canvas.pack()
         self.canvas.create_image(400, 300, image=self.background)
         self.show_current_weather()
+        self.show_hourly_forecast()
+        self.show_daily_forecast()
 
     def show_current_weather(self):
         self.canvas.create_image(150, 120, image=self.current_weather_image)
@@ -63,3 +77,32 @@ class ForecastWindow(object):
         self.canvas.create_text(700, 60, text=self.current.sunrise, font=("TkDefaultFont", 20))
         self.canvas.create_image(620, 120, image=self.sunset_icon)
         self.canvas.create_text(700, 120, text=self.current.sunset, font=("TkDefaultFont", 20))
+
+    def show_hourly_forecast(self):
+        x = 85
+        hour_y = 280
+        icon_y = 330
+        temp_y = 385
+
+        for icon, data in zip(self.hourly_icons, self.hourly.parsed_data):
+            self.canvas.create_text(x-2, hour_y, text=data.date[12:][:6], font=("TkDefaultFont", 14))
+            self.canvas.create_image(x, icon_y, image=icon)
+            self.canvas.create_text(x, temp_y, text=f"{round(data.temperature, 1)} {self.temp_units}",
+                                    font=("TkDefaultFont", 14))
+            x += 90
+
+    def show_daily_forecast(self):
+        x = 100
+        date_y = 430
+        weather_symbol_y = 490
+        icon_temp_y = 560
+
+        for icon, day_data, night_data in zip(self.daily_icons, self.daily.parsed_day_data, self.daily.parsed_night_data):
+            self.canvas.create_text(x, date_y, text=day_data.date[:12], font=("TkDefaultFont", 14))
+            self.canvas.create_image(x, weather_symbol_y, image=icon)
+            self.canvas.create_image(x-40, icon_temp_y, image=self.day_night_icon)
+            self.canvas.create_text(x+20, icon_temp_y, text=f"{round(day_data.temperature, 1)}{self.temp_units}\n"
+                                                            f"{round(night_data.temperature, 1)}{self.temp_units}",
+                                    font=("TkDefaultFont", 14))
+            x += 150
+

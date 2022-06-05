@@ -19,10 +19,10 @@ class ForecastWindow(object):
         self.canvas: tk.Canvas = tk.Canvas(self.window)
         self.background: tk.PhotoImage = tk.PhotoImage(file="res/images/background/background2.png")
 
-        with open("res/data/images.json") as file:
+        with open("res/data/images.json", encoding="UTF-8") as file:
             self.weather_icons: Dict[str, str] = json.load(file)
 
-        with open("res/data/wind_speed.json") as file:
+        with open("res/data/wind_speed.json", encoding="UTF-8") as file:
             self.wind_speed_unit: str = json.load(file)[self.units]
 
         with open("res/data/temp_units.json", encoding="UTF-8") as file:

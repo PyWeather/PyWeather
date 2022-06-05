@@ -17,10 +17,10 @@ class Menu(object):
         self.icon: tk.PhotoImage = tk.PhotoImage(file="res/images/icon.png")
         self.canvas: tk.Canvas = tk.Canvas(self.window)
         self.background: tk.PhotoImage = tk.PhotoImage(file="res/images/background/background1.png")
-        with open("res/data/country_codes.json") as file:
+        with open("res/data/country_codes.json", encoding="UTF-8") as file:
             self.country_codes = json.load(file)
         self.countries: Combobox = Combobox(self.window, values=list(self.country_codes.values()), state="readonly")
-        with open("res/data/units.json") as file:
+        with open("res/data/units.json", encoding="UTF-8") as file:
             self.units = json.load(file)
         self.units_widget: Combobox = Combobox(self.window, values=list(self.units.keys()), state="readonly")
         self.city: tk.Entry = tk.Entry(self.window, width=100)

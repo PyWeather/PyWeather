@@ -1,3 +1,4 @@
+import sys
 import tkinter as tk
 from tkinter.ttk import Combobox
 from tkinter import messagebox
@@ -30,7 +31,7 @@ class Menu(object):
     def get_api() -> str:
         if not os.path.isfile("api_key.txt"):
             open("api_key.txt", 'x').close()
-            exit()
+            sys.exit()
         else:
             with open("api_key.txt") as file:
                 return file.read()
